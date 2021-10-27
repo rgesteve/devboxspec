@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Bicep build",
+            "type": "process",
+            "command": "az",
+            "args": [
+                "bicep",
+                "build",
+               "-f", "${workspaceFolder}/ubuntu_azvm/first.bicep"
+//                "-f", "${file}",  // this works
+//              The ones below don't ... looks like there's something wrong when trying to pass flags with long names
+  //              "--file", "${file}",
+ //               "--outdir", "${workspaceFolder}/ubuntu_azvm/out"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

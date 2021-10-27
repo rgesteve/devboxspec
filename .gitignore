@@ -1,0 +1,7 @@
+# Emacs backup files
+*~
+
+# Build artifacts
+out/**/*
+# Should really make this more generic
+first.json
