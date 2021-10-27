@@ -3,8 +3,8 @@ param vmname    string
 param vmuser    string
 @secure()
 param vmpass    string
-@description('DNS Domain Name label.')
-param prefix    string
+@description('Unique DNS Name for the Public IP used to access the Virtual Machine.')
+param dnsLabelPrefix string = toLower('${vmname}-${uniqueString(resourceGroup().id)}')
 //param publickey string
 
 // param setupscript          string = 'https://raw.githubusercontent.com/yskszk63/azure-rust-win-vm/main/setup.ps1'
@@ -65,7 +65,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2020-07-01' = {
   }
   properties: { 
     dnsSettings: { 
-      domainNameLabel: prefix 
+      domainNameLabel: dnsLabelPrefix 
     } 
   }
 }
@@ -129,3 +129,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-12-01' = {
     }
   }
 }
+
+output adminUsername string = vmuser
+output hostname string = pip.properties.dnsSettings.fqdn
+output sshCommand string = 'ssh ${vmuser}@${pip.properties.dnsSettings.fqdn}'
