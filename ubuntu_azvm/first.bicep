@@ -99,13 +99,12 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-12-01' = {
     }
     storageProfile: {
       imageReference: {
-        publisher: 'MicrosoftWindowsServer'
-        offer: 'WindowsServer'
-        sku: '2019-datacenter-smalldisk-g2'
+        publisher: 'Canonical'
+        offer: 'UbuntuServer'
+        sku: '18.04-LTS'
         version: 'latest'
       }
       osDisk: {
-        osType: 'Windows'
         name: '${vmname}-osdisk'
         createOption: 'FromImage'
         caching: 'ReadWrite'
