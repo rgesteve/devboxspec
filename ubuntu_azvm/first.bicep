@@ -1,8 +1,9 @@
 @description('The name of you Virtual Machine.')
 param vmname    string
-//param vmuser    string
-//@secure()
-//param vmpass    string
+param vmuser    string
+@secure()
+param vmpass    string
+@description('DNS Domain Name label.')
 param prefix    string
 //param publickey string
 
@@ -116,8 +117,8 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-12-01' = {
     }
     osProfile: {
       computerName : vmname
-//      adminUsername: vmuser
-//      adminPassword: vmpass
+      adminUsername: vmuser
+      adminPassword: vmpass
     }
     networkProfile: { 
       networkInterfaces: [ 
