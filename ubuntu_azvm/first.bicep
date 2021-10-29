@@ -5,7 +5,9 @@ param vmuser    string
 param vmpass    string
 @description('Unique DNS Name for the Public IP used to access the Virtual Machine.')
 param dnsLabelPrefix string = toLower('${vmname}-${uniqueString(resourceGroup().id)}')
-//param publickey string
+@description('SSH Key for the Virtual Machine.')
+@secure()
+param publickey string
 
 // param setupscript          string = 'https://raw.githubusercontent.com/yskszk63/azure-rust-win-vm/main/setup.ps1'
 // param setupscriptTimestamp int    = 0
@@ -118,6 +120,17 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-12-01' = {
       computerName : vmname
       adminUsername: vmuser
       adminPassword: vmpass
+      linuxConfiguration: {
+        // disablePasswordAuthentication: true
+        ssh: {
+          publicKeys: [
+            {
+              path: '/home/${vmuser}/.ssh/authorized_keys'
+              keyData: publickey
+            }
+          ]
+        }
+      }
     }
     networkProfile: { 
       networkInterfaces: [ 
