@@ -11,6 +11,15 @@ az login
 az account set --subscription $(az account list | jq '.[0].id')
 
 az group create --name ${RESOURCEGRPNAME} --location "westus"
-az deployment group create --name ${DEPLOYMENTNAME} --resource-group ${RESOURCEGRPNAME} --template-file ubuntu_azvm/first.json 
+az deployment group create --name ${DEPLOYMENTNAME} --resource-group ${RESOURCEGRPNAME} --template-file ubuntu_azvm/first.json \
+  --query "properties.outputs.[publicFQDN.value, publicSSH.value]" -o tsv
 
-# az group delete --resource-group ${RESOURCEGRPNAME}
+# az group delete --name ${RESOURCEGRPNAME}
+# az deployment group create \
+#  --resource-group <REPLACE_WITH_YOUR_RESOURCE_GROUP> \
+#  --template-uri "https://raw.githubusercontent.com/Azure/iotedge-vm-deploy/1.2.0/edgeDeploy.json" \
+#  --parameters dnsLabelPrefix='<REPLACE_WITH_UNIQUE_DNS_FOR_VIRTUAL_MACHINE>' \
+#  --parameters adminUsername='azureuser' \
+#  --parameters authenticationType='sshPublicKey' \
+#  --parameters adminPasswordOrKey="$(< ~/.ssh/id_rsa.pub)" \
+#  --query "properties.outputs.[publicFQDN.value, publicSSH.value]" -o tsv
