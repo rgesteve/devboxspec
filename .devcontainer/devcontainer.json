@@ -11,7 +11,8 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		// having trouble reading terminal fonts on Windows Chrome (apparently people having trouble on iPad as well)
-		"terminal.integrated.gpuAcceleration": "off"
+		"terminal.integrated.gpuAcceleration": "off",
+		"azureTerraform.terminal": "integrated"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -29,6 +30,7 @@
 	"remoteUser": "vscode",
 	"features": {
 		"github-cli": "latest",
-		"azure-cli": "latest"
+		"azure-cli": "latest",
+		"terraform": "latest"
 	}
 }
