@@ -7,6 +7,9 @@ RESOURCEGRPNAME="testdeploy-grp"
 DEPLOYMENTNAME="FirstDeployment"
 
 az login
+# If above doesn't open an interactive browser (I've seen this happen sometimes when working on codespace)
+#     use `az login --use-device-code`, which will provide short code you can then use at https://microsoft.com/devicelogin
+#     to authenticate.  This is called "device flow" and (kinda) documented at https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli#sign-in-interactively
 # This actually doesn't work because the `list` command returns result with quotes
 az account set --subscription $(az account list | jq '.[0].id')
 
