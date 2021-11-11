@@ -8,7 +8,7 @@
             "args": [
                 "bicep",
                 "build",
-               "-f", "${workspaceFolder}/ubuntu_azvm/first.bicep"
+               "-f", "${workspaceFolder}/ubuntu_azvmbp/first.bicep"
 //                "-f", "${file}",  // this works
 //              The ones below don't ... looks like there's something wrong when trying to pass flags with long names
   //              "--file", "${file}",
