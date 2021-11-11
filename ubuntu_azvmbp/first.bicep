@@ -102,8 +102,10 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-12-01' = {
     storageProfile: {
       imageReference: {
         publisher: 'Canonical'
-        offer: 'UbuntuServer'
-        sku: '18.04-LTS'
+//        offer: 'UbuntuServer'
+//        sku: '18.04-LTS'
+        offer: '0001-com-ubuntu-server-focal'
+        sku: '20_04-lts'
         version: 'latest'
       }
       osDisk: {
