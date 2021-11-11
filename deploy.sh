@@ -14,7 +14,7 @@ az login
 az account set --subscription $(az account list | jq '.[0].id')
 
 az group create --name ${RESOURCEGRPNAME} --location "westus"
-az deployment group create --name ${DEPLOYMENTNAME} --resource-group ${RESOURCEGRPNAME} --template-file ubuntu_azvm/first.json \
+az deployment group create --name ${DEPLOYMENTNAME} --resource-group ${RESOURCEGRPNAME} --template-file ubuntu_azvmbp/first.json \
   --query "properties.outputs.[publicFQDN.value, publicSSH.value]" -o tsv
 
 # az group delete --name ${RESOURCEGRPNAME}
